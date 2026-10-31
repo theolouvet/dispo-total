@@ -12,6 +12,14 @@ Pour chaque carburant : **En stock** (prix affiché), **Rupture** (rupture tempo
 
 Aucun serveur ni clé d'API : tout est appelé depuis le navigateur.
 
+## Installation sur mobile (PWA)
+
+Une fois le site publié en HTTPS :
+- **Android (Chrome)** : menu ⋮ → « Installer l'application » ;
+- **iPhone (Safari)** : Partager → « Sur l'écran d'accueil ».
+
+Le service worker (`public/sw.js`) garde l'appli en cache pour qu'elle s'ouvre instantanément, mais jamais les stocks ni les prix : sans réseau, l'appli l'indique au lieu d'afficher des données périmées. Pour forcer la mise à jour du cache, incrémenter `CACHE` dans `sw.js`.
+
 ## Développement
 
 ```bash

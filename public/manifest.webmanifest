@@ -1,0 +1,17 @@
+{
+  "name": "Dispo Total SP95 / SP98",
+  "short_name": "Dispo Total",
+  "description": "Stations Total autour de vous qui ont encore du SP95 ou du SP98.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1c1917",
+  "theme_color": "#d4002a",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

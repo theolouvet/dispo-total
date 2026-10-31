@@ -152,7 +152,9 @@ async function rechercher(pos: Position, recentrer = true) {
     afficher();
   } catch (e) {
     if (num !== requeteEnCours) return;
-    elStatut.textContent = `Impossible de récupérer les données (${(e as Error).message}). Réessayez dans un instant.`;
+    elStatut.textContent = navigator.onLine
+      ? `Impossible de récupérer les données (${(e as Error).message}). Réessayez dans un instant.`
+      : 'Pas de connexion : impossible de vérifier les stocks.';
     elStatut.classList.add('erreur');
   }
 }
@@ -228,6 +230,16 @@ function changerVue(vue: 'liste' | 'carte') {
 document.querySelectorAll<HTMLButtonElement>('.onglets button').forEach((b) =>
   b.addEventListener('click', () => changerVue(b.dataset.vue as 'liste' | 'carte')),
 );
+
+// Relance la recherche au retour du réseau.
+window.addEventListener('online', () => {
+  if (position) rechercher(position, false);
+});
+
+// PWA : cache de l'appli (uniquement en production, pour ne pas gêner le développement).
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  navigator.serviceWorker.register('./sw.js').catch(() => { /* l'appli marche sans */ });
+}
 
 // Recherche automatique à l'ouverture.
 localiser();
