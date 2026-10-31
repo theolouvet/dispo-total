@@ -1,0 +1,135 @@
+:root {
+  --fond: #f5f5f4;
+  --carte-fond: #ffffff;
+  --texte: #1c1917;
+  --discret: #78716c;
+  --bord: #e7e5e4;
+  --accent: #d4002a;
+  --vert: #16a34a;
+  --vert-fond: #dcfce7;
+  --rouge: #dc2626;
+  --rouge-fond: #fee2e2;
+  --orange: #f59e0b;
+  --gris-fond: #f5f5f4;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #0c0a09;
+    --carte-fond: #1c1917;
+    --texte: #f5f5f4;
+    --discret: #a8a29e;
+    --bord: #292524;
+    --vert-fond: #14532d;
+    --rouge-fond: #7f1d1d;
+    --gris-fond: #292524;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--fond);
+  color: var(--texte);
+  font: 15px/1.4 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+a { color: inherit; }
+
+.barre {
+  padding: 12px 16px 8px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  background: var(--carte-fond);
+  border-bottom: 1px solid var(--bord);
+}
+.barre h1 { margin: 0 0 8px; font-size: 1.15rem; }
+.recherche { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.recherche input[type='search'] { flex: 1 1 140px; min-width: 0; }
+.recherche input[type='search'], .recherche select, .btn {
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--bord);
+  border-radius: 10px;
+  background: var(--carte-fond);
+  color: var(--texte);
+  font: inherit;
+}
+.btn { cursor: pointer; font-weight: 600; }
+.btn.principal { background: var(--accent); border-color: var(--accent); color: #fff; }
+.case { display: flex; gap: 6px; align-items: center; white-space: nowrap; }
+.statut { margin: 8px 0 0; font-size: 0.85rem; color: var(--discret); min-height: 1.2em; }
+.statut.erreur { color: var(--rouge); }
+
+.onglets { display: flex; background: var(--carte-fond); border-bottom: 1px solid var(--bord); }
+.onglets button {
+  flex: 1;
+  padding: 10px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--discret);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.onglets button.actif { color: var(--texte); border-bottom-color: var(--accent); }
+
+.contenu { flex: 1; min-height: 0; display: flex; }
+.liste { flex: 1; overflow-y: auto; padding: 12px 16px; display: flex; flex-direction: column; gap: 10px; }
+.zone-carte { flex: 1; position: relative; min-height: 0; }
+#carte { position: absolute; inset: 0; }
+.btn.flottant {
+  position: absolute;
+  z-index: 500;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.25);
+}
+
+/* Mobile : un onglet à la fois. */
+@media (max-width: 799px) {
+  .vue-liste .zone-carte, .vue-carte .liste { display: none; }
+}
+/* Ordinateur : liste et carte côte à côte. */
+@media (min-width: 800px) {
+  .onglets { display: none; }
+  .liste { flex: 0 0 400px; border-right: 1px solid var(--bord); }
+}
+
+.station {
+  position: relative;
+  padding: 12px 14px;
+  background: var(--carte-fond);
+  border: 1px solid var(--bord);
+  border-left: 5px solid var(--vert);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.station.partiel { border-left-color: var(--orange); }
+.station.rupture { border-left-color: var(--rouge); }
+.station h2, .popup h2 { margin: 0; font-size: 1rem; }
+.station h2 small, .popup h2 small { color: var(--discret); font-weight: 400; }
+.adresse { margin: 2px 0 8px; color: var(--discret); font-size: 0.85rem; }
+.puces { display: flex; flex-wrap: wrap; gap: 6px; }
+.puce { padding: 3px 9px; border-radius: 999px; font-size: 0.85rem; }
+.puce.dispo { background: var(--vert-fond); }
+.puce.rupture { background: var(--rouge-fond); }
+.puce.absent { background: var(--gris-fond); color: var(--discret); }
+.itineraire { position: absolute; top: 12px; right: 14px; font-size: 0.85rem; }
+.popup .itineraire { position: static; display: inline-block; margin-top: 8px; }
+.popup .adresse { color: #57534e; }
+.popup .puce.dispo { background: #dcfce7; }
+.popup .puce.rupture { background: #fee2e2; }
+.popup .puce.absent { background: #f5f5f4; color: #57534e; }
+.vide { color: var(--discret); text-align: center; margin-top: 32px; }
+
+.pied {
+  padding: 6px 16px;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+  font-size: 0.75rem;
+  color: var(--discret);
+  background: var(--carte-fond);
+  border-top: 1px solid var(--bord);
+}

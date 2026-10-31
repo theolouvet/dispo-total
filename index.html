@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#d4002a" />
+    <title>Dispo Total SP95/SP98</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛽</text></svg>" />
+  </head>
+  <body>
+    <header class="barre">
+      <h1>⛽ Total SP95 / SP98</h1>
+      <form id="recherche" class="recherche">
+        <button type="button" id="btn-localiser" class="btn principal" title="Utiliser ma position">📍 Me localiser</button>
+        <input id="adresse" type="search" placeholder="ou une ville…" autocomplete="off" />
+        <select id="rayon" title="Rayon de recherche">
+          <option value="5">5 km</option>
+          <option value="10" selected>10 km</option>
+          <option value="20">20 km</option>
+          <option value="30">30 km</option>
+        </select>
+        <label class="case"><input type="checkbox" id="seulement-dispo" /> En stock</label>
+      </form>
+      <p id="statut" class="statut" role="status"></p>
+    </header>
+
+    <nav class="onglets" aria-label="Affichage">
+      <button type="button" data-vue="liste" class="actif">Liste</button>
+      <button type="button" data-vue="carte">Carte</button>
+    </nav>
+
+    <main id="contenu" class="contenu vue-liste">
+      <section id="liste" class="liste" aria-live="polite"></section>
+      <section class="zone-carte">
+        <div id="carte"></div>
+        <button type="button" id="btn-ici" class="btn flottant">🔍 Chercher ici</button>
+      </section>
+    </main>
+
+    <footer class="pied">
+      Données : <a href="https://www.prix-carburants.gouv.fr" target="_blank" rel="noopener">prix-carburants.gouv.fr</a>
+      (déclarées par les stations) · enseignes et carte © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
