@@ -148,7 +148,7 @@ async function rechercher(pos: Position, recentrer = true) {
     if (num !== requeteEnCours) return; // une recherche plus récente a été lancée
     stations = res;
     const enStock = res.filter((s) => etatGlobal(s) !== 'rupture').length;
-    elStatut.textContent = `${res.length} station${res.length > 1 ? 's' : ''} Total dans ${rayon} km · ${enStock} avec du SP95 ou SP98 · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+    elStatut.textContent = `${res.length} station${res.length > 1 ? 's' : ''} Total dans ${rayon} km · ${enStock} avec du SP95, SP98 ou E10 · ${new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
     afficher();
   } catch (e) {
     if (num !== requeteEnCours) return;

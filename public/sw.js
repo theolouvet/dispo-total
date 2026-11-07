@@ -1,6 +1,6 @@
 // Service worker : met en cache l'appli elle-même (HTML, JS, CSS, icônes) pour une ouverture instantanée.
 // Les données (stocks, prix, carte) ne sont jamais mises en cache : elles doivent être fraîches.
-const CACHE = 'dispo-total-v1';
+const CACHE = 'dispo-total-v2';
 const SOCLE = ['./', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {

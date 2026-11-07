@@ -5,8 +5,8 @@
 
 import STATIONS_TOTAL from './stations-total.json';
 
-export type Carburant = 'SP95' | 'SP98';
-export const CARBURANTS: Carburant[] = ['SP95', 'SP98'];
+export type Carburant = 'SP95' | 'SP98' | 'E10';
+export const CARBURANTS: Carburant[] = ['SP95', 'SP98', 'E10'];
 
 /** dispo = en vente ; rupture = rupture temporaire ; absent = jamais vendu ici (ou rupture définitive). */
 export type Etat = 'dispo' | 'rupture' | 'absent';
@@ -52,6 +52,10 @@ interface EnregistrementOds {
   sp98_maj: string | null;
   sp98_rupture_type: string | null;
   sp98_rupture_debut: string | null;
+  e10_prix: number | null;
+  e10_maj: string | null;
+  e10_rupture_type: string | null;
+  e10_rupture_debut: string | null;
 }
 
 async function stationsOfficielles(pos: Position, rayonKm: number): Promise<EnregistrementOds[]> {
@@ -59,6 +63,7 @@ async function stationsOfficielles(pos: Position, rayonKm: number): Promise<Enre
     'id', 'adresse', 'ville', 'geom', 'carburants_disponibles',
     'sp95_prix', 'sp95_maj', 'sp95_rupture_type', 'sp95_rupture_debut',
     'sp98_prix', 'sp98_maj', 'sp98_rupture_type', 'sp98_rupture_debut',
+    'e10_prix', 'e10_maj', 'e10_rupture_type', 'e10_rupture_debut',
   ].join(',');
   const where = `within_distance(geom, geom'POINT(${pos.lon} ${pos.lat})', ${rayonKm}km)`;
   const resultats: EnregistrementOds[] = [];
@@ -75,7 +80,7 @@ async function stationsOfficielles(pos: Position, rayonKm: number): Promise<Enre
 }
 
 function infoCarburant(r: EnregistrementOds, c: Carburant): InfoCarburant {
-  const k = c.toLowerCase() as 'sp95' | 'sp98';
+  const k = c.toLowerCase() as 'sp95' | 'sp98' | 'e10';
   if (r.carburants_disponibles?.includes(c)) {
     return { etat: 'dispo', prix: r[`${k}_prix`] ?? undefined, depuis: r[`${k}_maj`] ?? undefined };
   }
@@ -93,7 +98,7 @@ export function distanceKm(a: Position, b: Position): number {
   return 2 * 6371 * Math.asin(Math.sqrt(h));
 }
 
-/** Stations Total dans le rayon qui vendent du SP95 ou du SP98, triées par distance. */
+/** Stations Total dans le rayon qui vendent du SP95, du SP98 ou de l'E10, triées par distance. */
 export async function chercherStations(pos: Position, rayonKm: number): Promise<Station[]> {
   const officielles = await stationsOfficielles(pos, rayonKm);
   return officielles
@@ -106,7 +111,7 @@ export async function chercherStations(pos: Position, rayonKm: number): Promise<
       lat: r.geom!.lat,
       lon: r.geom!.lon,
       distanceKm: distanceKm(pos, r.geom!),
-      carburants: { SP95: infoCarburant(r, 'SP95'), SP98: infoCarburant(r, 'SP98') },
+      carburants: { SP95: infoCarburant(r, 'SP95'), SP98: infoCarburant(r, 'SP98'), E10: infoCarburant(r, 'E10') },
     }))
     .filter((s) => CARBURANTS.some((c) => s.carburants[c].etat !== 'absent'))
     .sort((a, b) => a.distanceKm - b.distanceKm);

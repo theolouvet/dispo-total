@@ -1,6 +1,6 @@
-# Dispo Total SP95 / SP98
+# Dispo Total SP95 / SP98 / E10
 
-Petite appli web (mobile et ordinateur) qui indique, autour de votre position, quelles stations **Total** ont encore du **SP95** ou du **SP98**, avec une liste et une carte.
+Petite appli web (mobile et ordinateur) qui indique, autour de votre position, quelles stations **Total** ont encore du **SP95**, du **SP98** ou de l'**E10**, avec une liste et une carte.
 
 ## Fonctionnement
 
@@ -8,7 +8,7 @@ Petite appli web (mobile et ordinateur) qui indique, autour de votre position, q
 - **Enseigne** : le flux officiel ne donne pas la marque. `src/stations-total.json` liste les identifiants des stations Total, tirés d'OpenStreetMap (tag `ref:FR:prix-carburants`). Une station Total absente d'OpenStreetMap n'apparaîtra pas.
 - **Position** : géolocalisation du navigateur (HTTPS requis), ou recherche d'une ville via la Base Adresse Nationale, ou bouton « Chercher ici » sur la carte.
 
-Pour chaque carburant : **En stock** (prix affiché), **Rupture** (rupture temporaire, avec sa date de début) ou **Non vendu**. Les stations qui ne vendent ni SP95 ni SP98 sont masquées.
+Pour chaque carburant : **En stock** (prix affiché), **Rupture** (rupture temporaire, avec sa date de début) ou **Non vendu**. Les stations qui ne vendent ni SP95, ni SP98, ni E10 sont masquées.
 
 Aucun serveur ni clé d'API : tout est appelé depuis le navigateur.
 

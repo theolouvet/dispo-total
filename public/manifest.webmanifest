@@ -1,7 +1,7 @@
 {
-  "name": "Dispo Total SP95 / SP98",
+  "name": "Dispo Total SP95 / SP98 / E10",
   "short_name": "Dispo Total",
-  "description": "Stations Total autour de vous qui ont encore du SP95 ou du SP98.",
+  "description": "Stations Total autour de vous qui ont encore du SP95, du SP98 ou de l’E10.",
   "lang": "fr",
   "start_url": "./",
   "scope": "./",
